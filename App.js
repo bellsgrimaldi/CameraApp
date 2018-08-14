@@ -23,12 +23,13 @@ export default class App extends Component<Props> {
     ImagePicker.openCamera({
       width: 300,
       height: 400,
-      cropping: false
+      cropping: false,
+      compressImageQuality: 0.5
       }).then(image => {
         console.log('received image', image);
         console.log('received imagePath', image.path);
         this.setState({
-          image: {uri: image.path, width: image.width, height: image.height, mime: image.mime}
+          image: {uri: image.path, width: image.width, height: image.height, mime: image.mime, size: image.size}
         });
       }).catch(e => {
         console.log(e);
@@ -38,15 +39,11 @@ export default class App extends Component<Props> {
   renderImage(imagem) {
     console.log('received imagem', imagem);
     if(imagem === null){
-      return(
-        <View>
-          <Text style={styles.teste}>SEM IMAGEM</Text>
-        </View>
-      );
+      return;
     }
     return (
       <View>
-      <Text style={styles.teste}>IMAGEM:</Text>
+      <Text style={styles.teste}>IMAGEM: {imagem.size}</Text>
         <Image
           source={{ uri: imagem.uri }}
           style={styles.preview}
