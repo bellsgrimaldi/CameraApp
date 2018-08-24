@@ -33,6 +33,7 @@ export default class App extends Component < Props > {
     };
   }
 
+
   componentDidMount(){
     axios.get('https://victoriaribeiro.pythonanywhere.com/status/')
     .then((response)=>{
@@ -77,6 +78,7 @@ export default class App extends Component < Props > {
     if (imagem === null) {
       return;
     }
+
     
     let formdata = new FormData();
     formdata.append('image', { uri: imagem.uri, type: 'image/jpeg', name: 'filename' })
@@ -108,8 +110,6 @@ export default class App extends Component < Props > {
                   onPress={() => this.OpenCamera()}
                   title="Tirar foto"
                 />
-
-
                 {this.renderImage(this.state.image)}
               </View>
         </View>
